@@ -2,11 +2,10 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {motion, AnimatePresence } from "framer-motion";
 import {Header} from './components';
-import {Main, Album} from './pages';
+import {Main, Album, AlbumDetail} from './pages';
 import {useState, useEffect} from 'react';
 
 export default function App() {
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -14,6 +13,11 @@ export default function App() {
       window.gapi.auth2.init({
         client_id: '1029600064785-6rcj1192rr6u50eecs22h537c7005u88.apps.googleusercontent.com',
         scope: 'https://www.googleapis.com/auth/photoslibrary'
+      }).then(() => {
+        setIsLoggedIn(window.gapi.auth2.getAuthInstance().isSignedIn.get());
+        window.gapi.auth2.getAuthInstance().isSignedIn.listen((newIsSignedIn) => {
+          setIsLoggedIn(newIsSignedIn);
+        });
       });
     });
   }, [])
@@ -21,7 +25,7 @@ export default function App() {
   function handleSignIn() {
     window.gapi.auth2.getAuthInstance().signIn();
   }
-  
+
   return (
     <AnimatePresence>
       <BrowserRouter>
@@ -29,9 +33,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/album" element={<Album />}></Route>
+          <Route path="/album/:id" element={<AlbumDetail />}></Route>
         </Routes>
       </BrowserRouter>
-    
     </AnimatePresence>
   )
 }
