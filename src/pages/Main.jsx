@@ -4,6 +4,7 @@
 // import video4 from '/video4.mp4';
 import video from '/video.mp4';
 import { useState, useEffect } from 'react';
+import {motion} from "framer-motion";
 
 const Main = () => {
   // const videos = [video1, video2, video3, video4];
@@ -49,8 +50,14 @@ const Main = () => {
     };
   }, [videoLoaded]);
 
+  
+
   return (
-    <section className="w-screen h-screen relative overflow-hidden flex items-center justify-center">
+    <motion.section
+      initial={{ opacity: 0, y: 100 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -100 }}
+      className="w-screen h-screen relative overflow-hidden flex items-center justify-center">
       <video autoPlay loop muted className="h-full w-full object-cover">
         <source src={video} type="video/mp4" />
         Your browser does not support the video tag.
@@ -60,7 +67,7 @@ const Main = () => {
           {texts[textIndex]}
         </div>
       )}
-    </section>
+    </motion.section>
   );
 };
 
