@@ -26,6 +26,7 @@
   "dependencies": {
     "framer-motion": "^10.12.4",
     "googleapis": "^118.0.0",
-    "react-router-dom": "^6.10.0"
+    "react-router-dom": "^6.10.0",
+    "use-sound": "^4.0.1"
   }
 }

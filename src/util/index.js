@@ -1,4 +1,4 @@
-const album = [
+const albumThumbnail = [
   {
     name: "Test1",
     date: "2016/02/18",
@@ -16,6 +16,52 @@ const album = [
   },
 ];
 
+const albumData = [
+  [
+    {
+      date: new Date("2016-02-18"),
+      imgUrl: "/image1.jpg"
+    },
+    {
+      date: new Date("2016-02-19"),
+      imgUrl: "/image2.jpg"
+    },
+    {
+      date: new Date("2016-02-20"),
+      imgUrl: "/image3.jpg"
+    }
+  ],
+  [
+    {
+      date: new Date("2016-02-18"),
+      imgUrl: "/image1.jpg"
+    },
+    {
+      date: new Date("2016-02-19"),
+      imgUrl: "/image2.jpg"
+    },
+    {
+      date: new Date("2016-02-20"),
+      imgUrl: "/image3.jpg"
+    }
+  ],
+  [
+    {
+      date: new Date("2016-02-18"),
+      imgUrl: "/image1.jpg"
+    },
+    {
+      date: new Date("2016-02-19"),
+      imgUrl: "/image2.jpg"
+    },
+    {
+      date: new Date("2016-02-20"),
+      imgUrl: "/image3.jpg"
+    }
+  ],
+]
+
 export {
-  album
+  albumThumbnail,
+  albumData
 };

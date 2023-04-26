@@ -2,11 +2,12 @@
 // import video2 from '/video2.mp4';
 // import video3 from '/video3.mp4';
 // import video4 from '/video4.mp4';
-import video from '/video.mp4';
+
 import { useState, useEffect } from 'react';
 import {motion} from "framer-motion";
+import {Link} from 'react-router-dom';
 
-const Main = () => {
+const Main = ({videoLoaded}) => {
   // const videos = [video1, video2, video3, video4];
 
 
@@ -23,16 +24,9 @@ const Main = () => {
 
   // const [videoIndex, setVideoIndex] = useState(0);
   const [textIndex, setTextIndex] = useState(0);
-  const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
-    const video = document.querySelector('video');
-
-    const handleLoaded = () => {
-      setVideoLoaded(true);
-    };
-
-    video.addEventListener('loadeddata', handleLoaded);
+    
 
     // const videoInterval = setInterval(() => {
     //   setVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
@@ -46,27 +40,33 @@ const Main = () => {
     return () => {
       // clearInterval(videoInterval);
       clearInterval(textInterval);
-      video.removeEventListener('loadeddata', handleLoaded);
     };
-  }, [videoLoaded]);
+  }, []);
 
   
 
   return (
     <motion.section
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -100 }}
+      key="main"
+      initial={{ x: "-100%" }}
+      animate={{ x: 0, transition: { duration: 0.3 } }}
+      exit={{ x: "-100%", transition: { duration: 0.3 } }}
+      
       className="w-screen h-screen relative overflow-hidden flex items-center justify-center">
-      <video autoPlay loop muted className="h-full w-full object-cover">
-        <source src={video} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      
       {videoLoaded && (
         <div className="absolute top-1/2 left-1/2 text-slate-200 text-center transform -translate-x-1/2 -translate-y-1/2 text-7xl">
           {texts[textIndex]}
         </div>
       )}
+
+      <Link to="/album">
+        <h2 className="font-['Noto_Serif_JP'] text-white absolute text-base right-8 flex items-center gap-2 cursor-pointer">
+          Album 
+          <span className="text-base">></span>
+        </h2>
+      </Link>
+      
     </motion.section>
   );
 };
